@@ -1,3 +1,7 @@
+#template {
+    display: none;
+}
+
 .raid {
     border: 1px solid #CCCCCC;
     border-radius: 5px;
@@ -41,6 +45,6 @@
     transition: transform 0.5s ease;
 }
 
-.raid.hide .caret i {
+.raid.show .caret i {
     transform: rotate(180deg);
 }
