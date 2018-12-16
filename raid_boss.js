@@ -1,102 +1,65 @@
 var RaidBoss = function (options) {
     var t = this,
-        chart,
-        collapse,
         data = {
             "labels": [],
             "hps": [],
-            "dps": []
+            "kps": []
         },
         element,
+        hpsKey,
+        kpsKey,
         settings = {
             "id": "",
             "image": "",
             "name": "",
+            "chart": null,
             "raidData": null,
             "interval": 5,
-            "segments": 20
+            "segments": 20,
+            "borderColor": "#000000",
+            "fillColor": "#FFFFFF"
         };
 
     this.construct = function (options) {
         settings = $.extend(settings, options);
         element = $('#template>.raid').clone();
+        element.css("background-color", settings.fillColor);
+        element.css("border-color", settings.borderColor);
+        element.css("color", settings.borderColor);
         element.find(".icon").attr("src", settings.image);
         element.find(".title").text(settings.name);
 
-        collapse = element.find(".collapse").collapse({
-            "toggle": false
-        });
-
-        element.find(".icon, .title, .caret").click(t.toggle);
-
         $('#raids').append(element);
+    };
 
-        chart = new Chart(element.find(".canvas").get(0).getContext("2d"), {
-            "type": "bar",
-            "data": {
-                "labels": [],
-                "datasets": [
-                    {
-                        "type": "line",
-                        "label": "HP",
-                        "yAxisID": "HP",
-                        "data": [],
-                        "backgroundColor": "#f5c6cb55",
-                        "borderColor": "#721c24",
-                        "borderWidth": 2,
-                        "pointHoverBackgroundColor": "#f5c6cb99",
-                        "lineTension": 0
-                    },
-                    {
-                        "type": "bar",
-                        "label": "DPS",
-                        "yAxisID": "DPS",
-                        "backgroundColor": "#cce5ffff",
-                        "borderColor": "#0c5460",
-                        "borderWidth": 2,
-                        "hoverBackgroundColor": "#b8daff55",
-                        "data": [],
-                    }
-
-                ]
-            },
-            "options": {
-                "maintainAspectRatio": false,
-                "scales": {
-                    "xAxes": [{
-                        "type": "realtime",
-                        "realtime": {
-                            duration: (60*1000) * settings.interval * settings.segments
-                        }
-                    }],
-                    "yAxes": [
-                        {
-                            "id": "HP",
-                            "type": 'linear',
-                            "position": "left"
-                        },
-                        {
-                            "id": "DPS",
-                            "type": 'linear',
-                            "position": "right",
-                            "gridLines": {
-                                "display": false
-                            }
-                        }
-                    ]
-                }
-            }
+    this.insertHpsDataset = function () {
+        hpsKey = settings.chart.data.datasets.length;
+        settings.chart.data.datasets.push({
+            "type": "line",
+            "label": "HP Remaining",
+            "yAxisID": "HP",
+            "data": [],
+            "backgroundColor": settings.fillColor,
+            "borderColor": settings.borderColor,
+            "borderWidth": 2,
+            "fill": false,
+            "pointHoverBackgroundColor": settings.fillColor,
+            "lineTension": 0
         });
     };
 
-    this.toggle = function () {
-        if (element.hasClass("show")) {
-            element.removeClass("show");
-            collapse.collapse("hide");
-        } else {
-            element.addClass("show");
-            collapse.collapse("show");
-        }
+    this.insertKpsDataset = function () {
+        kpsKey = settings.chart.data.datasets.length;
+        settings.chart.data.datasets.push({
+            "type": "bar",
+            "label": "Kills Per Second",
+            "yAxisID": "KPS",
+            "backgroundColor": settings.fillColor,
+            "borderColor": settings.borderColor,
+            "borderWidth": 2,
+            "hoverBackgroundColor": settings.fillColor,
+            "data": [],
+        });
     };
 
     this.update = function () {
@@ -110,18 +73,16 @@ var RaidBoss = function (options) {
             if (index === -1) {
                 data.labels.push(newData.labels[x]);
                 data.hps.push(newData.hps[x]);
-                data.dps.push(newData.dps[x]);
+                data.kps.push(newData.kps[x]);
             } else {
                 data.hps[index] = newData.hps[x];
-                data.dps[index] = newData.dps[x];
+                data.kps[index] = newData.kps[x];
             }
         }
 
-        chart.data.labels = data.labels;
-        chart.data.datasets[0].data = data.hps;
-        chart.data.datasets[1].data = data.dps;
-
-        chart.update();
+        settings.chart.data.labels = data.labels;
+        settings.chart.data.datasets[hpsKey].data = data.hps;
+        settings.chart.data.datasets[kpsKey].data = data.kps;
     };
 
     this.construct(options);

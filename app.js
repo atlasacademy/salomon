@@ -1,16 +1,121 @@
 $(document).ready(function () {
-    var delay = 10,
+    var delay = 20,
         interval = 1,
         segments = 10,
+        chart = new Chart($('#chart').get(0).getContext("2d"), {
+            "type": "bar",
+            "data": {
+                "labels": [],
+                "datasets": []
+            },
+            "options": {
+                "legend": {
+                    "display": false
+                },
+                "maintainAspectRatio": false,
+                "scales": {
+                    "xAxes": [{
+                        "type": "realtime",
+                        "realtime": {
+                            "duration": (60 * 1000) * interval * segments
+                        }
+                    }],
+                    "yAxes": [
+                        {
+                            "id": "HP",
+                            "type": 'linear',
+                            "position": "left"
+                        },
+                        {
+                            "id": "KPS",
+                            "type": 'linear',
+                            "position": "right",
+                            "gridLines": {
+                                "display": false
+                            }
+                        }
+                    ]
+                }
+            }
+        }),
         raidData = new RaidData(),
         bosses = [
             new RaidBoss({
                 "id": "flauros",
                 "image": "assets/raid2.png",
                 "name": "2nd Seat - Flauros",
+                "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
-                "segments": segments
+                "segments": segments,
+                "borderColor": "#856404",
+                "fillColor": "#fff3cd"
+            }),
+            new RaidBoss({
+                "id": "forneus",
+                "image": "assets/raid3.png",
+                "name": "3rd Seat - Forneus",
+                "chart": chart,
+                "raidData": raidData,
+                "interval": interval,
+                "segments": segments,
+                "borderColor": "#0c5460",
+                "fillColor": "#d1ecf1"
+            }),
+            new RaidBoss({
+                "id": "barbatos",
+                "image": "assets/raid4.png",
+                "name": "4th Seat - Barbatos",
+                "chart": chart,
+                "raidData": raidData,
+                "interval": interval,
+                "segments": segments,
+                "borderColor": "#6c757d",
+                "fillColor": "#d6d8d9"
+            }),
+            new RaidBoss({
+                "id": "halphas",
+                "image": "assets/raid5.png",
+                "name": "5th Seat - Halphas",
+                "chart": chart,
+                "raidData": raidData,
+                "interval": interval,
+                "segments": segments,
+                "borderColor": "#322348",
+                "fillColor": "#cbbde2"
+            }),
+            new RaidBoss({
+                "id": "amon",
+                "image": "assets/raid6.png",
+                "name": "6th Seat - Amon Ra",
+                "chart": chart,
+                "raidData": raidData,
+                "interval": interval,
+                "segments": segments,
+                "borderColor": "#721c24",
+                "fillColor": "#f8d7da"
+            }),
+            new RaidBoss({
+                "id": "sabnock",
+                "image": "assets/raid7.png",
+                "name": "7th Seat - Sabnock",
+                "chart": chart,
+                "raidData": raidData,
+                "interval": interval,
+                "segments": segments,
+                "borderColor": "#000000",
+                "fillColor": "#6c757d"
+            }),
+            new RaidBoss({
+                "id": "andromalius",
+                "image": "assets/raid10.png",
+                "name": "10th Seat - Andromalius",
+                "chart": chart,
+                "raidData": raidData,
+                "interval": interval,
+                "segments": segments,
+                "borderColor": "#343a40",
+                "fillColor": "#ffc107"
             })
         ];
 
@@ -19,24 +124,26 @@ $(document).ready(function () {
     // end of script
 
     function init() {
+        bosses.map(function (boss) {
+            boss.insertHpsDataset();
+        });
+        bosses.map(function (boss) {
+            boss.insertKpsDataset();
+        });
+        chart.update();
+
+        update();
+        window.setInterval(update, delay * 1000);
+    }
+
+    function update() {
         raidData.fetch(function () {
             bosses.map(function (boss) {
                 boss.update();
-                boss.toggle();
             });
 
-            startFeed();
+            chart.update();
         });
-    }
-
-    function startFeed() {
-        window.setInterval(function () {
-            raidData.fetch(function () {
-                bosses.map(function (boss) {
-                    boss.update();
-                });
-            });
-        }, delay * 1000);
     }
 
 });

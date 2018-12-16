@@ -33,7 +33,7 @@ var RaidData = function () {
         var data = {
                 "labels": [],
                 "hps": [],
-                "dps": []
+                "kps": []
             },
             intervalDuration = interval * 60 * 1000,
             intervalEndSegment = Math.ceil(Date.now() / intervalDuration),
@@ -47,7 +47,7 @@ var RaidData = function () {
 
             data.labels.push(startTime);
             data.hps.push(Math.random() * 100);
-            data.dps.push(Math.random() * 1000000);
+            data.kps.push(Math.random() * 1000000);
 
             // matchingData = rawData.filter(function (data) {
             //     var timeCaptured = moment(data[4]);

@@ -10,25 +10,24 @@
     <title>Salomon Raid Tracker</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <h1>Solomon Raid Tracker</h1>
     <div>Brought to you by Atlas Academy</div>
     <hr>
     <div id="raids"></div>
+    <div style="height:300px;">
+        <canvas id="chart" class="canvas"></canvas>
+    </div>
 
     <div id="template">
-        <div class="raid">
-            <img class="icon" src="" data-toggle="collapse" data-target="#raid2">
-            <div class="title" data-toggle="collapse" data-target="#raid2"></div>
-            <div class="caret" data-toggle="collapse" data-target="#raid2">
-                <i class="fas fa-caret-down"></i>
+        <div class="raid row">
+            <img class="icon" src="">
+            <div class="col-7">
+                <span class="title"></span>
             </div>
-            <div class="raid-content collapse">
-                <hr>
-                <div class="status">HP: 100% &nbsp; Estimated Time Remaining: 1 Hour 25 Minutes</div>
-                <div style="height:300px;">
-                    <canvas class="canvas"></canvas>
-                </div>
+            <div class="col-5">
+                <span class="status">100%</span>
+                <span class="time_remaining">Remaining: 1 Hour</span>
             </div>
         </div>
     </div>
