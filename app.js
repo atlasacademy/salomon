@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    var delay = 20,
-        interval = 1,
-        segments = 10,
+    var delay = 60,
+        interval = 5,
+        segments = 5,
         chart = new Chart($('#chart').get(0).getContext("2d"), {
             "type": "bar",
             "data": {
@@ -24,7 +24,11 @@ $(document).ready(function () {
                         {
                             "id": "HP",
                             "type": 'linear',
-                            "position": "left"
+                            "position": "left",
+                            "ticks": {
+                                "min": 0,
+                                "max": 100
+                            }
                         },
                         {
                             "id": "KPS",
@@ -32,6 +36,9 @@ $(document).ready(function () {
                             "position": "right",
                             "gridLines": {
                                 "display": false
+                            },
+                            "ticks": {
+                                "min": 0
                             }
                         }
                     ]
@@ -49,7 +56,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#856404",
-                "fillColor": "#fff3cd"
+                "fillColor": "#fff3cd",
+                "bossHp": 1,
+                "bossTotal": 2000000
             }),
             new RaidBoss({
                 "id": "forneus",
@@ -60,7 +69,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#0c5460",
-                "fillColor": "#d1ecf1"
+                "fillColor": "#d1ecf1",
+                "bossHp": 1,
+                "bossTotal": 2000000
             }),
             new RaidBoss({
                 "id": "barbatos",
@@ -71,7 +82,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#6c757d",
-                "fillColor": "#d6d8d9"
+                "fillColor": "#d6d8d9",
+                "bossHp": 1,
+                "bossTotal": 2000000
             }),
             new RaidBoss({
                 "id": "halphas",
@@ -82,7 +95,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#322348",
-                "fillColor": "#cbbde2"
+                "fillColor": "#cbbde2",
+                "bossHp": 1,
+                "bossTotal": 2000000
             }),
             new RaidBoss({
                 "id": "amon",
@@ -93,7 +108,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#721c24",
-                "fillColor": "#f8d7da"
+                "fillColor": "#f8d7da",
+                "bossHp": 1,
+                "bossTotal": 2000000
             }),
             new RaidBoss({
                 "id": "sabnock",
@@ -104,7 +121,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#000000",
-                "fillColor": "#6c757d"
+                "fillColor": "#6c757d",
+                "bossHp": 1,
+                "bossTotal": 2000000
             }),
             new RaidBoss({
                 "id": "andromalius",
@@ -115,7 +134,9 @@ $(document).ready(function () {
                 "interval": interval,
                 "segments": segments,
                 "borderColor": "#343a40",
-                "fillColor": "#ffc107"
+                "fillColor": "#ffc107",
+                "bossHp": 1,
+                "bossTotal": 6000000
             })
         ];
 

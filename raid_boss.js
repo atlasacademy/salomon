@@ -6,6 +6,7 @@ var RaidBoss = function (options) {
             "kps": []
         },
         element,
+        estimateTimeOfDeath,
         hpsKey,
         kpsKey,
         settings = {
@@ -17,8 +18,12 @@ var RaidBoss = function (options) {
             "interval": 5,
             "segments": 20,
             "borderColor": "#000000",
-            "fillColor": "#FFFFFF"
-        };
+            "fillColor": "#FFFFFF",
+            "bossHp": 1,
+            "bossTotal": 2000000,
+            "inverseHp": true
+        },
+        timerRunning = false;
 
     this.construct = function (options) {
         settings = $.extend(settings, options);
@@ -63,7 +68,13 @@ var RaidBoss = function (options) {
     };
 
     this.update = function () {
-        var newData = settings.raidData.getData(settings.id, settings.interval, settings.segments),
+        var newData = settings.raidData.getData({
+                "id": settings.id,
+                "interval": settings.interval,
+                "segments": settings.segments,
+                "bossHp": settings.bossHp,
+                "bossTotal": settings.bossTotal
+            }),
             index;
 
         for (var x in newData.labels) {
@@ -83,6 +94,40 @@ var RaidBoss = function (options) {
         settings.chart.data.labels = data.labels;
         settings.chart.data.datasets[hpsKey].data = data.hps;
         settings.chart.data.datasets[kpsKey].data = data.kps;
+
+        var currentHpPercent = settings.raidData.getHpPercent(settings.id, moment());
+        if (currentHpPercent === 0) {
+            element.find(".status").text("DEFEATED");
+        } else {
+            element.find(".status").text(currentHpPercent  + " %");
+        }
+
+
+        var startTime = moment().subtract(30, "minutes"),
+            endTime = moment(),
+            currentHp = settings.raidData.getHp(settings.id, endTime, settings.bossTotal),
+            kps = settings.raidData.getKps(settings.id, startTime, endTime, settings.bossHp, settings.bossTotal);
+
+        if (currentHpPercent === 0 || kps === 0) {
+            estimateTimeOfDeath = null;
+        } else {
+            var killRemaining = currentHp / settings.bossHp,
+                secondsRemaining = killRemaining / kps;
+
+            estimateTimeOfDeath = moment().add(secondsRemaining, "seconds");
+        }
+
+        if (!timerRunning) {
+            window.setInterval(function () {
+                if (estimateTimeOfDeath === null) {
+                    element.find(".time_remaining").text("Remaining: Unknown");
+                } else {
+                    element.find(".time_remaining").text("Remaining: " + estimateTimeOfDeath.toNow(true));
+                }
+            });
+
+            timerRunning = true;
+        }
     };
 
     this.construct(options);
