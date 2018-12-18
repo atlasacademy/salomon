@@ -1,7 +1,6 @@
 var RaidData = function () {
     var t = this,
         apiKey = "AIzaSyCUBf747HBCMqntUWvjyjEf3q3GqhMW4vE",
-        sheetDateFormat = "MM/DD/YYYY HH:mm:ss",
         sheetUri = "https://sheets.googleapis.com/v4/spreadsheets/",
         sheetId = "1V8BhdZ0mT0IA0rX6xf_YNE31L3vo2W5moaM1MTNcuyQ",
         sheetRange = "Results!A:F",
@@ -72,7 +71,7 @@ var RaidData = function () {
 
     this.getHp = function (id, time, bossTotal) {
         var latestData = rawData.filter(function (data) {
-                var timeCaptured = moment(data[4], sheetDateFormat);
+                var timeCaptured = moment.unix(data[4]);
 
                 return data.length === 6
                     && data[0] === id
@@ -84,7 +83,7 @@ var RaidData = function () {
 
     this.getHpPercent = function (id, time) {
         var latestData = rawData.filter(function (data) {
-                var timeCaptured = moment(data[4], sheetDateFormat);
+                var timeCaptured = moment.unix(data[4]);
 
                 return data.length === 6
                     && data[0] === id
