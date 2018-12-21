@@ -55,7 +55,7 @@ var RaidData = function () {
 
             data.labels.push(startTime);
             data.hps.push(t.getHpPercent(options.id, endTime));
-            data.kps.push(t.getKps(options.id, startTime, endTime, options.bossHp, options.bossTotal));
+            data.kps.push(t.getKills(options.id, startTime, endTime, options.bossTotal));
         }
 
         return data;
@@ -84,6 +84,14 @@ var RaidData = function () {
             percent = latestData === undefined ? 100 : latestData[2];
 
         return Math.round(percent * 100) / 100;
+    };
+
+    this.getKills = function (id, startTime, endTime, bossTotal) {
+        var startingHp = t.getHp(id, startTime, bossTotal),
+            endingHp = t.getHp(id, endTime, bossTotal),
+            hpDifference = Math.abs(startingHp - endingHp);
+
+        return hpDifference;
     };
 
     this.getKps = function (id, startTime, endTime, bossHp, bossTotal) {

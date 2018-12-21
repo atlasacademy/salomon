@@ -57,7 +57,7 @@ var RaidBoss = function (options) {
         kpsKey = settings.chart.data.datasets.length;
         settings.chart.data.datasets.push({
             "type": "bar",
-            "label": "Kills Per Second",
+            "label": "Kills",
             "yAxisID": "KPS",
             "backgroundColor": settings.fillColor,
             "borderColor": settings.borderColor,
