@@ -100,7 +100,7 @@ $(document).ready(function () {
                 "bossTotal": 2000000
             }),
             new RaidBoss({
-                "id": "amon",
+                "id": "amon_ra",
                 "image": "assets/raid6.png",
                 "name": "6th Seat - Amon Ra",
                 "chart": chart,
