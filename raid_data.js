@@ -21,7 +21,7 @@ var RaidData = function () {
             "success": function (result) {
                 rawData = result.values.slice(1);
                 rawData = rawData.filter(function (row) {
-                    return row[3] !== "0";
+                    return row[3] !== "0" && row[3] !== "1";
                 });
 
                 if (successfulCallback !== undefined)
