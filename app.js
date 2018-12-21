@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var delay = 300,
-        interval = 15,
+        interval = getUrlParameter("interval") ? getUrlParameter("interval") : 15,
         segments = 10,
         chart = new Chart($('#chart').get(0).getContext("2d"), {
             "type": "bar",
@@ -143,6 +143,13 @@ $(document).ready(function () {
     init();
 
     // end of script
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
     function init() {
         bosses.map(function (boss) {
