@@ -20,8 +20,29 @@ var RaidData = function () {
             },
             "success": function (result) {
                 rawData = result.values.slice(1);
-                rawData = rawData.filter(function (row) {
-                    return row[3] !== "0" && row[3] !== "1";
+
+                var bossHps = {};
+
+                rawData = rawData.filter(function (row, key) {
+                    if (!row[0] || !row[3])
+                        return false;
+
+                    var hp = parseInt(row[3]);
+                    if (isNaN(hp))
+                        return false;
+
+                    if (hp <= 1)
+                        return false;
+
+                    if (bossHps[row[0]] === undefined)
+                        bossHps[row[0]] = hp;
+
+                    if (bossHps[row[0]] > hp)
+                        return false;
+
+                    bossHps[row[0]] = hp;
+
+                    return true;
                 });
 
                 if (successfulCallback !== undefined)
