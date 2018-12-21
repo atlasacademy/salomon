@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var delay = 300,
-        interval = 60,
+        interval = 15,
         segments = 10,
         chart = new Chart($('#chart').get(0).getContext("2d"), {
             "type": "bar",
