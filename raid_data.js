@@ -20,6 +20,9 @@ var RaidData = function () {
             },
             "success": function (result) {
                 rawData = result.values.slice(1);
+                rawData = rawData.filter(function (row) {
+                    return row[3] !== "0";
+                });
 
                 if (successfulCallback !== undefined)
                     successfulCallback.call(null, result.values);
@@ -53,17 +56,6 @@ var RaidData = function () {
             data.labels.push(startTime);
             data.hps.push(t.getHpPercent(options.id, endTime));
             data.kps.push(t.getKps(options.id, startTime, endTime, options.bossHp, options.bossTotal));
-
-            // matchingData = rawData.filter(function (data) {
-            //     var timeCaptured = moment(data[4]);
-            //
-            //     return data.length === 6
-            //         && data[0] === id
-            //         && timeCaptured.isSameOrAfter(startTime)
-            //         && timeCaptured.isBefore(endTime);
-            // });
-            //
-            //
         }
 
         return data;
@@ -78,7 +70,7 @@ var RaidData = function () {
                     && timeCaptured.isBefore(time);
             }).pop();
 
-        return latestData === undefined ? bossTotal : latestData[3];
+        return bossTotal - (latestData === undefined ? 0 : latestData[3]);
     };
 
     this.getHpPercent = function (id, time) {

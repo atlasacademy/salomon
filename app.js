@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    var delay = 60,
-        interval = 5,
-        segments = 5,
+    var delay = 300,
+        interval = 60,
+        segments = 10,
         chart = new Chart($('#chart').get(0).getContext("2d"), {
             "type": "bar",
             "data": {
