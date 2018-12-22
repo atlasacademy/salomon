@@ -119,7 +119,9 @@ var RaidBoss = function (options) {
 
         if (!timerRunning) {
             window.setInterval(function () {
-                if (estimateTimeOfDeath === null) {
+                if (currentHpPercent === 0) {
+                    element.find(".time_remaining").text("");
+                } else if (estimateTimeOfDeath === null) {
                     element.find(".time_remaining").text("Remaining: Unknown");
                 } else {
                     var message = "Remaining: " + estimateTimeOfDeath.toNow(true);
