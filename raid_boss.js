@@ -124,7 +124,9 @@ var RaidBoss = function (options) {
                 } else if (estimateTimeOfDeath === null) {
                     element.find(".time_remaining").text("Remaining: Unknown");
                 } else {
-                    var message = "Remaining: " + estimateTimeOfDeath.toNow(true);
+                    var now = moment(),
+                        hours = Math.round(estimateTimeOfDeath.diff(now, "hours", true) * 100) / 100,
+                        message = "Remaining: " + hours + " hours";
                     message += " | KPS: " + kps;
 
                     element.find(".time_remaining").text(message);
