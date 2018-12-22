@@ -50,7 +50,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "flauros",
                 "image": "assets/raid2.png",
-                "name": "2nd Seat - Flauros",
+                "name": "II - Flauros (Lancer)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
@@ -63,7 +63,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "forneus",
                 "image": "assets/raid3.png",
-                "name": "3rd Seat - Forneus",
+                "name": "III - Forneus (Caster)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
@@ -76,7 +76,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "barbatos",
                 "image": "assets/raid4.png",
-                "name": "4th Seat - Barbatos",
+                "name": "IV - Barbatos (Assassin)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
@@ -89,7 +89,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "halphas",
                 "image": "assets/raid5.png",
-                "name": "5th Seat - Halphas",
+                "name": "V - Halphas (Berserker)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
@@ -102,7 +102,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "amon_ra",
                 "image": "assets/raid6.png",
-                "name": "6th Seat - Amon Ra",
+                "name": "VI - Amon Ra (Rider)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
@@ -115,7 +115,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "sabnock",
                 "image": "assets/raid7.png",
-                "name": "7th Seat - Sabnock",
+                "name": "VII - Sabnock (Archer)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
@@ -128,7 +128,7 @@ $(document).ready(function () {
             new RaidBoss({
                 "id": "andromalius",
                 "image": "assets/raid10.png",
-                "name": "10th Seat - Andromalius",
+                "name": "X - Andromalius (Saber)",
                 "chart": chart,
                 "raidData": raidData,
                 "interval": interval,
