@@ -1,6 +1,6 @@
 var RaidData = function () {
     var t = this,
-        apiKey = "AIzaSyCUBf747HBCMqntUWvjyjEf3q3GqhMW4vE",
+        apiKey = "AIzaSyDrraTnBkZeIrnsal5up354czK7mtZ3pjo",
         sheetUri = "https://sheets.googleapis.com/v4/spreadsheets/",
         sheetId = "1V8BhdZ0mT0IA0rX6xf_YNE31L3vo2W5moaM1MTNcuyQ",
         sheetRange = "Results!A:F",

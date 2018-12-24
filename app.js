@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var delay = 300,
+    var delay = 600,
         interval = getUrlParameter("interval") ? getUrlParameter("interval") : 60,
         segments = 10,
         chart = new Chart($('#chart').get(0).getContext("2d"), {
