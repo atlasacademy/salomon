@@ -67,6 +67,12 @@ var RaidBoss = function (options) {
         });
     };
 
+    this.isDead = function () {
+        var percent = settings.raidData.getHpPercent(settings.id, moment());
+
+        return percent === 0;
+    };
+
     this.update = function () {
         var newData = settings.raidData.getData({
                 "id": settings.id,

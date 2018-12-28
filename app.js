@@ -166,11 +166,38 @@ $(document).ready(function () {
 
     function update() {
         raidData.fetch(function () {
+            var isComplete = true;
             bosses.map(function (boss) {
                 boss.update();
+
+                if (!boss.isDead())
+                    isComplete = false;
             });
 
             chart.update();
+
+            if (isComplete)
+                showFinal();
+        });
+    }
+
+    function showFinal() {
+        var final = $('#final');
+
+        if (final.is(":visible"))
+            return;
+
+        final
+            .css("height", 0)
+            .css("opacity", 0)
+            .show()
+            .animate({
+                "height": "500px",
+                "opacity": 1
+            }, 500);
+
+        final.get(0).scrollIntoView({
+            behavior: 'smooth'
         });
     }
 

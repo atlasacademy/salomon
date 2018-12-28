@@ -2,6 +2,19 @@ body {
     min-width: 600px;
     padding: 20px;
 }
+
+#final {
+    display: none;
+    height: 500px;
+    text-align: center;
+}
+
+#final img {
+    display: block;
+    height: 400px;
+    margin: 0 auto;
+}
+
 #template {
     display: none;
 }
